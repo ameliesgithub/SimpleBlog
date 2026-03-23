@@ -1,0 +1,15 @@
+{%  extends 'base.html' %}
+{% block title %}
+    Post: {{ post.title }}
+{% endblock %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <img src="../../{{ post.header_image }}" alt="Post Image" width="400">
+    <p>Title Tag: {{ post.title_tag }}</p>
+    <p>Author: {{ post.author }}</p>
+    <p>Body: {{ post.body }}</p>
+    <p>Date: {{ post.post_date }}</p>
+    <p>Category: {{  post.category }}</p>
+    <p>Snippet: {{ post.snippet }}</p>
+    <p>Likes: {{ post.likes }}</p>
+{% endblock %}
