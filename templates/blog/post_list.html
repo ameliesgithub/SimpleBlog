@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block content %}
+    <a href="{% url 'post_create' %}">Create New Post</a>
     <ul>
         {% for post in object_list %}
             <li>
-                <a>
-                    <a href="{% url 'post_detail_view' post.id %}">
-                    {{ post.title }}
-                </a>
+                <a href="{% url 'post_detail_view' post.id %}">
+                {{ post.title }}
+            </a>
             </li>
     {% endfor %}
     </ul>
