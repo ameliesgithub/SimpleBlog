@@ -22,3 +22,12 @@ class Post(models.Model):
     def __str__(self):
         return self.category.name + ' - ' + self.title
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='images/', blank=True, null=True)
+    github_url = models.URLField(blank=True, null=True)
+    linkedin_url = models.URLField(blank=True, null=True)
+    dob = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username

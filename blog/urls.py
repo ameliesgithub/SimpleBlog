@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from blog.views import index, category_detail, post_detail, create_category, PostListView, PostDetailView, \
-    PostCreateView, PostUpdateView, PostDeleteView, register
+    PostCreateView, PostUpdateView, PostDeleteView, register, create_user
 
 # wenns ein generic view ist muss ich den PK in den path hinzufügen
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('register/', register, name='register'),
     # dadurch hat man automatisch login, logout functions:
     path('accounts/', include("django.contrib.auth.urls")),
+    path('create_users/', create_user, name='create_users'),
 ]
