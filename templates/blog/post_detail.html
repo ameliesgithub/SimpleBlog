@@ -5,6 +5,36 @@
 
 {% block content %}
     <h1>{{ object.title }}</h1>
-    <p>{{ object.body }}</p>
+    {% if object.header_image %}
+    <p>
+        <img src="{{ object.header_image.url }}"
+             alt="{{ object.title}}" width="300" height="200">
+    </p>
+    {% endif %}
+    <p>{{ object.body | safe }}</p>
     <p>{{ object.post_date }}</p>
+    {% if user.is_authenticated %}
+        <a href="{% url 'likes_unlikes' post_id=object.id %}" class="btn btn-success">
+            {% if request.user in object.likes.all %}
+                Unlike
+            {% else %}
+                Like
+            {% endif %}
+        </a>
+    {% else %}
+        <a href="{% url 'login' %}">
+            Login to like
+        </a>
+    {% endif %}
+    <p>{{ object.likes.count }} likes</p>
+
+    <h3>Comments</h3>
+    <form action="{% url 'add_comments' post_id=object.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="comment_body" placeholder="Add a comment">
+        <button type="submit">Add Comment</button>
+    </form>
+    {% for comment in object.comments_set.all %}
+        <p>{{ comment.user.username }}: {{ comment.comment_body }}</p>
+    {% endfor %}
 {% endblock %}
